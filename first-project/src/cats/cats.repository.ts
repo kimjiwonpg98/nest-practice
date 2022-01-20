@@ -24,4 +24,10 @@ export class CatsRepository {
     const cat = await this.catModel.findOne({ email });
     return cat;
   }
+
+  async findCatByIdWithoutPassword(catId: string): Promise<Cat | null> {
+    const cat = await this.catModel.findById(catId).select("-password");
+    // select는 필드 중 원하는걸 가져옴 (-는 빼고 가져온다는 뜻)
+    return cat;
+  }
 }

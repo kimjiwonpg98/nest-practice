@@ -25,7 +25,6 @@ import { Cat } from "./cats.schema";
 import { CatsService } from "./cats.service";
 import { ReadOnlyCatDto } from "./dto/cat.dto";
 import { CatRequestDto } from "./dto/cats.request.dto";
-import { Request } from "express";
 
 @Controller("cats")
 @UseInterceptors(SuccessInterceptor)

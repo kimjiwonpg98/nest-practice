@@ -30,4 +30,15 @@ export class CatsRepository {
     // select는 필드 중 원하는걸 가져옴 (-는 빼고 가져온다는 뜻)
     return cat;
   }
+
+  async findByIdAndUpdateImg(id: string, fileName: string) {
+    const cat = await this.catModel.findById(id);
+    cat.imgUrl = `http://localhost:8000/media/${fileName}`;
+    const newCat = await cat.save();
+    return newCat.readOnlyData;
+  }
+
+  async findAll() {
+    return await this.catModel.find();
+  }
 }

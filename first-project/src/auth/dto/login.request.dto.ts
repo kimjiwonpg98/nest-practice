@@ -1,7 +1,7 @@
-import { PickType } from "@nestjs/swagger";
-import { Cat } from "src/cats/cats.schema";
+import { PickType } from '@nestjs/swagger';
+import { Cat } from 'src/cats/cats.schema';
 
 export class LoginRequestDto extends PickType(Cat, [
-  "email",
-  "password",
+  'email',
+  'password',
 ] as const) {}

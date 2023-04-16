@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/boilerplate" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/graphql" vcs="Git" />
   </component>
 </project>

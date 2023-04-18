@@ -2,8 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Board {
+  id: String!
+  title: String!
+  userId: String!
+  users: User!
+}
+
 type Query {
+  getAllBoard: [Board!]!
   getAllUser: [User!]!
+  getOneBoard: Board!
   getOneUser: User!
 }
 
@@ -11,6 +20,4 @@ type User {
   email: String!
   id: String!
   name: String!
-  nickname: String!
-  number: String!
 }

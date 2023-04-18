@@ -1,6 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { User } from './user.model';
 import { UserService } from './user.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 export interface test {
   id: string;
@@ -12,7 +13,10 @@ export interface test {
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Query(() => [User])
   async getAllUser() {
@@ -21,12 +25,10 @@ export class UserResolver {
 
   @Query(() => User)
   async getOneUser() {
-    return {
-      id: '1',
-      email: 'jiwonpg98@gmail.com',
-      nickname: 'test',
-      name: '김지원',
-      number: '+82 10-1234-5678',
-    };
+    return await this.prisma.user.findFirst({
+      where: {
+        id: 1,
+      },
+    });
   }
 }

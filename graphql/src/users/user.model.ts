@@ -9,11 +9,5 @@ export class User {
   email: string;
 
   @Field()
-  nickname: string;
-
-  @Field()
   name: string;
-
-  @Field()
-  number: string;
 }

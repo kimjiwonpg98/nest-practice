@@ -11,7 +11,4 @@ export class Board {
 
   @Field()
   title: string;
-
-  @Field()
-  users: User;
 }

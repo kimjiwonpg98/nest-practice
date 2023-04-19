@@ -6,17 +6,17 @@ type Board {
   id: String!
   title: String!
   userId: String!
-  users: User!
 }
 
 type Query {
   getAllBoard: [Board!]!
   getAllUser: [User!]!
-  getOneBoard: Board!
-  getOneUser: User!
+  getOneBoard(id: Float!): Board!
+  getOneUser(id: Float!): User!
 }
 
 type User {
+  boards: [Board!]!
   email: String!
   id: String!
   name: String!

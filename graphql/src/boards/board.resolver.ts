@@ -1,7 +1,6 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Board } from './boards.model';
 import { BoardService } from './board.service';
-import { User } from '../users/user.model';
 
 @Resolver(() => Board)
 export class BoardResolver {
@@ -9,11 +8,13 @@ export class BoardResolver {
 
   @Query(() => [Board])
   async getAllBoard() {
+    console.log('get all board');
     return this.boardService.getAllBoard();
   }
 
   @Query(() => Board)
-  async getOneBoard() {
-    return await this.boardService.getOneBoard(1);
+  async getOneBoard(@Args('id') id: number) {
+    console.log('get one board');
+    return await this.boardService.getOneBoard(id);
   }
 }

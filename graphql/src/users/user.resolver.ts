@@ -1,34 +1,33 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { User } from './user.model';
 import { UserService } from './user.service';
-import { PrismaService } from '../prisma/prisma.service';
-
-export interface test {
-  id: string;
-  name: string;
-  number: string;
-  email: string;
-  nickname: string;
-}
+import { Board } from '../boards/boards.model';
+import { BoardService } from '../boards/board.service';
+import { UserLoader } from './user.loader';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
-    private readonly prisma: PrismaService,
+    private readonly boardService: BoardService,
+    private readonly userLoader: UserLoader,
   ) {}
 
   @Query(() => [User])
   async getAllUser() {
-    return this.userService.getAllUser();
+    console.log('get all');
+    return await this.userService.getAllUser();
   }
 
   @Query(() => User)
-  async getOneUser() {
-    return await this.prisma.user.findFirst({
-      where: {
-        id: 1,
-      },
-    });
+  async getOneUser(@Args('id') id: number) {
+    return await this.userService.getOneUser(id);
+  }
+
+  @ResolveField(() => [Board])
+  async boards(@Parent() user: User) {
+    console.log(`posts(user: ${JSON.stringify(user)})`);
+    const { id } = user;
+    return this.userLoader.batchUsers.load(+id);
   }
 }

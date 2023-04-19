@@ -7,4 +7,12 @@ export class UserService {
   async getAllUser() {
     return await this.prisma.user.findMany();
   }
+
+  async getOneUser(userId: number) {
+    return await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+  }
 }

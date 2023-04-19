@@ -22,4 +22,16 @@ export class BoardService {
       },
     });
   }
+
+  async getBoardById(ids: number[]) {
+    return await this.prisma.board.findMany({
+      where: {
+        user: {
+          id: {
+            in: ids,
+          },
+        },
+      },
+    });
+  }
 }

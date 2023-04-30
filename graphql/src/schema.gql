@@ -16,7 +16,7 @@ type Query {
 }
 
 type User {
-  boards: [Board!]!
+  boards: Board!
   email: String!
   id: String!
   name: String!

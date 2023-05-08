@@ -6,7 +6,7 @@ import { BoardService } from '../boards/board.service';
 export class UserLoader {
   constructor(private boardService: BoardService) {}
 
-  batchUsers = new DataLoader(async (userIds: number[]) => {
+  batchUsers = new DataLoader(async (userIds: string[]) => {
     const users = await this.boardService.getBoardById(userIds);
     const usersMap = new Map(users.map((user) => [user.id, user]));
     return userIds.map((userId) => usersMap.get(userId));

@@ -1,5 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Board } from './boards.model';
+import { Board } from './board.entity';
 import { BoardService } from './board.service';
 
 @Resolver(() => Board)
@@ -13,7 +13,7 @@ export class BoardResolver {
   }
 
   @Query(() => Board)
-  async getOneBoard(@Args('id') id: number) {
+  async getOneBoard(@Args('id') id: string) {
     console.log('get one board');
     return await this.boardService.getOneBoard(id);
   }

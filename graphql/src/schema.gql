@@ -5,18 +5,27 @@
 type Board {
   id: String!
   title: String!
-  userId: String!
+  user_id: String!
+}
+
+input CreateUserDto {
+  email: String!
+  name: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserDto!): Float!
 }
 
 type Query {
   getAllBoard: [Board!]!
   getAllUser: [User!]!
-  getOneBoard(id: Float!): Board!
+  getOneBoard(id: String!): Board!
   getOneUser(id: Float!): User!
 }
 
 type User {
-  boards: Board!
+  boards: Board
   email: String!
   id: String!
   name: String!

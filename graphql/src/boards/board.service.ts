@@ -1,37 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Board } from './board.entity';
 
 @Injectable()
 export class BoardService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(Board)
+    private readonly boardRepository: Repository<Board>,
+  ) {}
+
   async getAllBoard() {
-    return await this.prisma.board.findMany({
-      include: {
-        user: true,
-      },
-    });
+    return await this.boardRepository.find({});
   }
 
-  async getOneBoard(id: number) {
-    return await this.prisma.board.findFirst({
+  async getOneBoard(id: string) {
+    return await this.boardRepository.findOne({
       where: {
         id,
       },
-      include: {
-        user: true,
-      },
     });
   }
 
-  async getBoardById(ids: number[]) {
-    return await this.prisma.board.findMany({
-      where: {
-        user: {
-          id: {
-            in: ids,
-          },
-        },
-      },
-    });
+  async getBoardById(ids: string[]) {
+    return await this.boardRepository
+      .createQueryBuilder('board')
+      .whereInIds(ids)
+      .innerJoinAndSelect('board.user', 'user')
+      .getMany();
   }
 }

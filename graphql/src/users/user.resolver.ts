@@ -1,9 +1,17 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { User } from './user.model';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { User } from './user.entity';
 import { UserService } from './user.service';
-import { Board } from '../boards/boards.model';
+import { Board } from '../boards/board.entity';
 import { BoardService } from '../boards/board.service';
 import { UserLoader } from './user.loader';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -15,19 +23,22 @@ export class UserResolver {
 
   @Query(() => [User])
   async getAllUser() {
-    console.log('get all');
     return await this.userService.getAllUser();
   }
 
   @Query(() => User)
   async getOneUser(@Args('id') id: number) {
-    return await this.userService.getOneUser(id);
+    return await this.userService.getOneUser(id.toString());
   }
 
   @ResolveField(() => [Board])
   async boards(@Parent() user: User) {
-    console.log(`posts(user: ${JSON.stringify(user)})`);
     const { id } = user;
-    return this.userLoader.batchUsers.load(+id);
+    return await this.userLoader.batchUsers.load(id);
+  }
+
+  @Mutation(() => Number)
+  async createUser(@Args('createUserInput') body: CreateUserDto) {
+    return await this.userService.createUser(body);
   }
 }

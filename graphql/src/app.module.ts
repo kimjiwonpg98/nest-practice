@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './users/user.module';
@@ -21,6 +20,6 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     BoardModule,
   ],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

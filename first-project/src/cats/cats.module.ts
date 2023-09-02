@@ -1,12 +1,12 @@
-import { forwardRef, Module } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
-import { MulterModule } from "@nestjs/platform-express";
-import { AuthModule } from "src/auth/auth.module";
-import { CatsController } from "./controllers/cats.controller";
-import { CatsRepository } from "./cats.repository";
-import { Cat, CatSchema } from "./cats.schema";
-import { CatsService } from "./services/cats.service";
-import { Comments, CommentsSchema } from "src/comments/comments.schema";
+import { forwardRef, Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MulterModule } from '@nestjs/platform-express';
+import { AuthModule } from 'src/auth/auth.module';
+import { CatsController } from './controllers/cats.controller';
+import { CatsRepository } from './cats.repository';
+import { Cat, CatSchema } from './cats.schema';
+import { CatsService } from './services/cats.service';
+import { Comments, CommentsSchema } from 'src/comments/comments.schema';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { Comments, CommentsSchema } from "src/comments/comments.schema";
     ]),
     forwardRef(() => AuthModule),
     MulterModule.register({
-      dest: "./upload",
+      dest: './upload',
     }),
   ],
   controllers: [CatsController],

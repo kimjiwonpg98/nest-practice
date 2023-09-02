@@ -1,8 +1,8 @@
-import { Comments } from "../comments/comments.schema";
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
-import { Document, SchemaOptions } from "mongoose";
-import { ApiProperty } from "@nestjs/swagger";
+import { Comments } from '../comments/comments.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Document, SchemaOptions } from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 const options: SchemaOptions = {
   timestamps: true,
@@ -11,8 +11,8 @@ const options: SchemaOptions = {
 @Schema(options)
 export class Cat extends Document {
   @ApiProperty({
-    example: "amamov@kakao.com",
-    description: "email",
+    example: 'amamov@kakao.com',
+    description: 'email',
     required: true,
   })
   @Prop({
@@ -24,8 +24,8 @@ export class Cat extends Document {
   email: string;
 
   @ApiProperty({
-    example: "amamov",
-    description: "name",
+    example: 'amamov',
+    description: 'name',
     required: true,
   })
   @Prop({
@@ -36,8 +36,8 @@ export class Cat extends Document {
   name: string;
 
   @ApiProperty({
-    example: "23810",
-    description: "password",
+    example: '23810',
+    description: 'password',
     required: true,
   })
   @Prop({
@@ -49,7 +49,7 @@ export class Cat extends Document {
 
   @Prop({
     default:
-      "https://user-images.githubusercontent.com/75289370/126998921-ec7865fb-0c01-4b98-97a4-0dc09bf21bf3.jpg",
+      'https://user-images.githubusercontent.com/75289370/126998921-ec7865fb-0c01-4b98-97a4-0dc09bf21bf3.jpg',
   })
   @IsString()
   imgUrl: string;
@@ -67,7 +67,7 @@ export class Cat extends Document {
 
 const _CatSchema = SchemaFactory.createForClass(Cat);
 
-_CatSchema.virtual("readOnlyData").get(function (this: Cat) {
+_CatSchema.virtual('readOnlyData').get(function (this: Cat) {
   return {
     id: this.id,
     email: this.email,
@@ -77,12 +77,12 @@ _CatSchema.virtual("readOnlyData").get(function (this: Cat) {
   };
 });
 
-_CatSchema.virtual("comments", {
-  ref: "comments",
-  localField: "_id",
-  foreignField: "info",
+_CatSchema.virtual('comments', {
+  ref: 'comments',
+  localField: '_id',
+  foreignField: 'info',
 });
-_CatSchema.set("toObject", { virtuals: true });
-_CatSchema.set("toJSON", { virtuals: true });
+_CatSchema.set('toObject', { virtuals: true });
+_CatSchema.set('toJSON', { virtuals: true });
 
 export const CatSchema = _CatSchema;

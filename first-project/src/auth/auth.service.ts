@@ -1,8 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { CatsRepository } from "src/cats/cats.repository";
-import * as bcrypt from "bcrypt";
-import { LoginRequestDto } from "./dto/login.request.dto";
-import { JwtService } from "@nestjs/jwt";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { CatsRepository } from 'src/cats/cats.repository';
+import * as bcrypt from 'bcrypt';
+import { LoginRequestDto } from './dto/login.request.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
 
     const cat = await this.catsRepository.findCatByEmail(email);
 
-    if (!cat) throw new UnauthorizedException("이메일을 확인해주세요");
+    if (!cat) throw new UnauthorizedException('이메일을 확인해주세요');
 
     const isPasswordValidated: boolean = await bcrypt.compare(
       password,
@@ -24,7 +24,7 @@ export class AuthService {
     );
 
     if (!isPasswordValidated)
-      throw new UnauthorizedException("비밀번호를 확인해주세요");
+      throw new UnauthorizedException('비밀번호를 확인해주세요');
 
     const payload = { email: email, sub: cat.id };
 

@@ -1,10 +1,10 @@
-import { HttpException, Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model, Types } from "mongoose";
-import { Cat } from "./cats.schema";
-import { CatRequestDto } from "./dto/cats.request.dto";
-import * as mongoose from "mongoose";
-import { CommentsSchema } from "src/comments/comments.schema";
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
+import { Cat } from './cats.schema';
+import { CatRequestDto } from './dto/cats.request.dto';
+import * as mongoose from 'mongoose';
+import { CommentsSchema } from 'src/comments/comments.schema';
 
 @Injectable()
 export class CatsRepository {
@@ -14,7 +14,7 @@ export class CatsRepository {
       const result = await this.catModel.exists({ email });
       return result;
     } catch (err) {
-      throw new HttpException("db error", 400);
+      throw new HttpException('db error', 400);
     }
   }
 
@@ -30,7 +30,7 @@ export class CatsRepository {
   async findCatByIdWithoutPassword(
     catId: string | Types.ObjectId,
   ): Promise<Cat | null> {
-    const cat = await this.catModel.findById(catId).select("-password");
+    const cat = await this.catModel.findById(catId).select('-password');
     // select는 필드 중 원하는걸 가져옴 (-는 빼고 가져온다는 뜻)
     return cat;
   }
@@ -43,10 +43,10 @@ export class CatsRepository {
   }
 
   async findAll() {
-    const CommentsModel = mongoose.model("comments", CommentsSchema);
+    const CommentsModel = mongoose.model('comments', CommentsSchema);
     const result = await this.catModel
       .find()
-      .populate("comments", CommentsModel);
+      .populate('comments', CommentsModel);
 
     return result;
   }

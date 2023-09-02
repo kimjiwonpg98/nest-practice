@@ -1,8 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from "passport-jwt";
-import { CatsRepository } from "src/cats/cats.repository";
-import { Payload } from "./jwt.payload";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { CatsRepository } from 'src/cats/cats.repository';
+import { Payload } from './jwt.payload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (cat) {
       return cat; // request.user안에 들어감
     } else {
-      throw new UnauthorizedException("접근 오류입니다.");
+      throw new UnauthorizedException('접근 오류입니다.');
     }
   }
 }

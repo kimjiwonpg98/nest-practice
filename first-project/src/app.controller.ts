@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Req, Param } from "@nestjs/common";
-import { Request } from "express";
-import { AppService } from "./app.service";
+import { Body, Controller, Get, Req, Param } from '@nestjs/common';
+import { Request } from 'express';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {

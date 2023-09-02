@@ -1,8 +1,8 @@
-import { ApiProperty, PickType } from "@nestjs/swagger";
-import { Cat } from "../cats.schema";
+import { ApiProperty, PickType } from '@nestjs/swagger';
+import { Cat } from '../cats.schema';
 
 export class CatRequestDto extends PickType(Cat, [
-  "email",
-  "name",
-  "password",
+  'email',
+  'name',
+  'password',
 ] as const) {}
